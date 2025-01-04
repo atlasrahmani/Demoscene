@@ -4,10 +4,89 @@
 		<meta charset="utf-8">
 		<title>My first three.js app</title>
 		<style>
+            @font-face {
+                font-family: 'Bayland';
+                src: url('./fonts/Bayland.otf') format('opentype');
+            }
 			body { margin: 0; }
+            .text-overlay {
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                color: #fff;
+                font-family: 'Bayland', Arial, sans-serif;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 1s ease-out;
+            }
+            .text-overlay.visible {
+                opacity: 1;
+                transform: translateY(0);
+                animation: textFlicker 3s linear infinite;
+            }
+            .main-title {
+                font-size: 72px;
+                margin-top: 20%;
+                text-shadow: 0 0 10px #00fff9,
+                           0 0 20px #00fff9,
+                           0 0 40px #00fff9;
+                letter-spacing: 2px;
+                animation: glow 2s ease-in-out infinite alternate;
+            }
+            .sub-title {
+                font-size: 36px;
+                margin-top: 20px;
+                text-shadow: 0 0 5px #ff00ff,
+                           0 0 10px #ff00ff,
+                           0 0 20px #ff00ff;
+                letter-spacing: 1px;
+                animation: glitch 3s infinite;
+            }
+
+            @keyframes glow {
+                from {
+                    text-shadow: 0 0 10px #00fff9,
+                               0 0 20px #00fff9,
+                               0 0 40px #00fff9;
+                }
+                to {
+                    text-shadow: 0 0 20px #00fff9,
+                               0 0 40px #00fff9,
+                               0 0 60px #00fff9;
+                }
+            }
+
+            @keyframes textFlicker {
+                0% { opacity: 0.9; }
+                2% { opacity: 0.5; }
+                4% { opacity: 0.9; }
+                19% { opacity: 1; }
+                21% { opacity: 0.7; }
+                23% { opacity: 1; }
+                80% { opacity: 0.9; }
+                83% { opacity: 0.4; }
+                87% { opacity: 1; }
+            }
+
+            @keyframes glitch {
+                0% { transform: none; opacity: 1; }
+                7% { transform: skew(-0.5deg, -0.9deg); opacity: 0.75; }
+                10% { transform: none; opacity: 1; }
+                27% { transform: none; opacity: 1; }
+                30% { transform: skew(0.8deg, -0.1deg); opacity: 0.75; }
+                35% { transform: none; opacity: 1; }
+                52% { transform: none; opacity: 1; }
+                55% { transform: skew(-1deg, 0.2deg); opacity: 0.75; }
+                50% { transform: none; opacity: 1; }
+                100% { transform: none; opacity: 1; }
+            }
 		</style>
 	</head>
 	<body>
+        <div class="text-overlay">
+            <h1 class="main-title">Introducing</h1>
+            <p class="sub-title">The Next Generation</p>
+        </div>
 		<script type="module" src="/main.js"></script>
 	</body>
 </html>
